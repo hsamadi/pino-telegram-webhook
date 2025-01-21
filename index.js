@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import build from "pino-abstract-transport";
+import { escapeHTML } from "./helpers.js";
 
 const API_URL = "https://api.telegram.org/bot";
 
@@ -42,7 +43,8 @@ export async function sendMsgToTg(
 }
 
 const verboseSerializer = {
-  html: (string) => `<pre><code class="language-json">${string}</code></pre>`,
+  html: (string) =>
+    `<pre><code class="language-json">${escapeHTML(string)}</code></pre>`,
   markdown: (string) => `\`\`\`json\n${string}\n\`\`\``,
   markdownv2: (string) => `\`\`\`json\n${string}\n\`\`\``,
 };
